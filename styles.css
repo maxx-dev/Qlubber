@@ -1,6 +1,6 @@
 
 html { height: 100% }
-body { height: 100%; margin: 0; padding: 0; overflow: hidden; }
+body { height: 100%; margin: 0; padding: 0; overflow: hidden; font-family:Arial }
 
 
 #Phone {
@@ -27,31 +27,35 @@ body { height: 100%; margin: 0; padding: 0; overflow: hidden; }
 }
 
 
-#Phone .Search {
+#Phone #Search {
 
     position:absolute;
     top:15px;
     margin:0px;
     padding:0px;
-    width:95%;
+    width:90%;
     height:50px;
-    left:2.5%;
+    left:5%;
     -webkit-box-shadow: 3px 3px 13px 3px #898684;
-    font-size:30px;
+    font-size:20px;
     -webkit-transition: top 300s;
+    line-height:25px;
+    color:#898684;
+
 }
 
 
 
 #Phone .DetailLayer {
 
+    display:none;
     z-index:2;
     position:absolute;
     top:100%;
     width:100%;
     height:100%;
     transition: top 1s;
-    -webkit-transition: top 1s;
+    -webkit-transition: top 0ms;
     background-color:#e3e0de;
 
 }
@@ -120,4 +124,136 @@ body { height: 100%; margin: 0; padding: 0; overflow: hidden; }
     width:30px;
     height:30px;
 
+}
+
+
+/* RATING */
+
+.RateLayer label {
+
+    position:relative;
+
+    left:10px;
+    width:20%;
+    height:20px;
+
+}
+
+.RateLayer table {
+
+    width:100%;
+    text-align:left;
+}
+
+.RateLayer tr {
+
+    width:100%;
+    height:50px;
+
+}
+
+.RateLayer tr td{
+
+    width:80%;
+
+}
+
+.RateLayer tr td img {
+
+    width:40px;
+    height:40px;
+}
+
+.RateLayer tr .title {
+
+    width:100px;
+    padding-left:30px;
+}
+
+
+
+.RateLayer input {
+
+    position:relative;
+    width:80%;
+    height:20px;
+
+}
+
+
+.RateLayer .rating {
+
+
+    width:90%;
+}
+
+
+/*             styles for the star rater                */
+.star-rating{
+    list-style:none;
+    margin: 0px;
+    margin-left:65px;
+    padding:0px;
+    width: 100px;
+    height: 20px;
+    position: relative;
+    background: url(img/star_rating.gif) top left repeat-x;
+}
+.star-rating li{
+    padding:0px;
+    margin:0px;
+    /*\*/
+    float: left;
+    /* */
+}
+.star-rating li a{
+    display:block;
+    width:20px;
+    height: 20px;
+    text-decoration: none;
+    text-indent: -9000px;
+    z-index: 20;
+    position: absolute;
+    padding: 0px;
+}
+.star-rating li a:hover{
+    background: url(img/star_rating.gif) left bottom;
+    z-index: 1;
+    left: 0px;
+}
+.star-rating a.one-star{
+    left: 0px;
+}
+.star-rating a.one-star:hover{
+    width:20px;
+}
+.star-rating a.two-stars{
+    left:20px;
+}
+.star-rating a.two-stars:hover{
+    width: 40px;
+}
+.star-rating a.three-stars:hover{
+    width: 60px;
+}
+.star-rating a.three-stars{
+    left: 40px;
+}
+.star-rating a.four-stars{
+    left: 60px;
+}
+.star-rating a.four-stars:hover{
+    width: 80px;
+}
+.star-rating a.five-stars{
+    left: 80px;
+}
+.star-rating a.five-stars:hover{
+    width: 100px;
+}
+
+
+.Slider {
+
+    width:200px;
 }
