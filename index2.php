@@ -20,32 +20,44 @@
         }
 
     </style>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDkiG0Cf46ZW6vqvZytWl0RPimm8ImDRRo&sensor=true">
-    </script>
+    <!--<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDkiG0Cf46ZW6vqvZytWl0RPimm8ImDRRo&sensor=true"></script>!-->
+    <script type="text/javascript" src="Jquery/jquery-1.9.1.min.js"></script>
     <script type="text/javascript">
         function initialize() {
-            var mapOptions = {
-                center: new google.maps.LatLng(-34.397, 150.644),
-                zoom: 8,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-             var map = new google.maps.Map(document.getElementById("Map"),
-                mapOptions);
 
-            var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(-34.397,150.644),
-                map: map,
-                title: 'Hello World!'
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: "GetDetails.js",
+                data: {},
+                success: function(content)
+                {
+                    console.log(content)
+                }
             });
 
+                /* var mapOptions = {
+                     center: new google.maps.LatLng(-34.397, 150.644),
+                     zoom: 8,
+                     mapTypeId: google.maps.MapTypeId.ROADMAP
+                 };
+                  var map = new google.maps.Map(document.getElementById("Map"),
+                     mapOptions);
 
-            google.maps.event.addListener(marker, 'click', function() {
-                map.setZoom(18);
-                map.setCenter(marker.getPosition());
+                 var marker = new google.maps.Marker({
+                     position: new google.maps.LatLng(-34.397,150.644),
+                     map: map,
+                     title: 'Hello World!'
+                 });
 
-                alert('sss');
 
-            });
+                 google.maps.event.addListener(marker, 'click', function() {
+                     map.setZoom(18);
+                     map.setCenter(marker.getPosition());
+
+                     alert('sss');
+
+                 });*/
         }
 
 
