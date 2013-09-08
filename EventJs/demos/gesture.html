@@ -1,0 +1,157 @@
+<!doctype html>
+<head>
+    <meta name="viewport" content="minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+</head>
+<style>
+    html, body {
+        font-family: arial;
+        margin: 0;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+    }
+    div#container {
+        position: absolute; right: 0; background: #000; color: #fff; z-index: 1; padding-bottom: 0.5em;
+        width: 120px;
+    }
+    div#container span {
+        padding-left: 5px;
+    }
+    div.header {
+        background: #ff0; color: #000; padding: 0.5em; margin-bottom: 0.25em;
+    }
+    #test {
+        padding: 1em;
+        background: green;
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        overflow: hidden;
+        color: white;
+        -ms-touch-action: none;
+    }
+    li {
+        list-style-type: square;
+        padding: 0.15em 0.5em;
+    }
+
+    #LeftTile {
+
+        position:absolute;
+        top:0px;
+        left:0px;
+        height:100%;
+        background-color:red;
+        width:45%;
+    }
+
+    #RightTile {
+
+        position:absolute;
+        top:0px;
+        left:55%;
+        height:100%;
+        background-color:blue;
+        width:45%;
+    }
+
+
+    #SearchInput {
+
+        position:absolute;
+        left:50%;
+        top:300px;
+        width:300px;
+        height:35px;
+        margin-left:-125px;
+        display:none;
+
+    }
+</style>
+<body>
+<div id="container">
+    <div class="header">Gestures</div>
+</div>
+<div id="test"></div>
+<div id="LeftTile"></div>
+<div id="RightTile"></div>
+<input id="SearchInput" type="text">
+
+<!-- Pointer events library. -->
+<script src="../js/Event.js"></script>
+<script src="jquery-2.0.3.js"></script>
+<script>
+
+  PosX_Right =  $('#RightTile').css('left');
+  PosX_Left =  $('#LeftTile').css('left');
+
+  Event.add(window, "gesture", function(event, self) {
+      console.log(self);
+      if (self.fingers == 2 && self.state != 'end')
+      {
+
+          $('#SearchInput').fadeIn();
+          var Width = parseInt($('#LeftTile').css('width'));
+
+          if (self.touches[0].x > self.touches[1].x )
+          {
+              $('#LeftTile').css('left',self.touches[1].x-Width);
+              $('#RightTile').css('left', self.touches[0].x);
+          }
+          else
+          {
+              $('#RightTile').css('left',self.touches[1].x);
+              $('#LeftTile').css('left',self.touches[0].x-Width);
+          }
+      }
+      if (self.state == 'end')
+      {
+          console.log('END');
+          if(parseInt($('#RightTile').css('left')) < window.innerWidth-100 || parseInt($('#LeftTile').css('left')) > 100 )
+          {
+              $('#RightTile').animate({left:PosX_Right});
+              $('#LeftTile').animate({left:PosX_Left});
+
+              self.touches[0].x = undefined;
+              self.touches[1].x = undefined;
+              $('#SearchInput').fadeOut();
+          }
+          else
+          {
+              console.log('ADJUST');
+              $('#RightTile').css({left:window.innerWidth});
+              $('#LeftTile').css({left:-880});
+              $('#SearchInput').fadeIn();
+          }
+
+      }
+  });
+
+  eventjs.add(window, "tap", function(event, self) {
+      console.log('Event.js TAP');
+
+
+  });
+
+  Event.add(document, 'drag', function(event,self)
+  {console.log ('DRAG');
+
+      if (self.state == 'end')
+      {
+          console.log ('END');
+      }
+  });
+
+
+  Event.add(document, 'touchstart', function(event)
+  {
+
+  });
+
+
+
+
+</script>
+</body>
