@@ -63,22 +63,9 @@ function initialize() {
         title: 'Hello World!',
         icon: 'img/icon.png'
     });*/
-
-
-    $.ajax({
-        type: "POST",
-        url: "GetDetails.php",
-        data: {},
-        dataType: 'json',
-        success: function(data)
-        {
-            Data = data;
-            console.log(data);
-            console.log('Data Received');
-            LoadData();
+LoadData();
             Events();
-        }
-    });
+
 
 }
 
@@ -88,10 +75,119 @@ function LoadData ()
 {
     Markers = [];
     // RECEIVE DATA VIA JSON HERE
+   Data={
+    "Clubs": [
+        {
+            "Name": "Ruby Skye",
+            "Type": "Club",
+			"DetailURL": "img/ruby_skye_detail_pin.png",
+            "Pos": {
+                "lat": "37.78751621619397",
+                "lon": "-122.410207092762"
+            }
+        },
+        {
+            "Name": "Cantina",
+            "Type": "Bar",
+			"DetailURL": "img/cantina_detail_pin.png",
+            "Pos": {
+                "lat": "37.7892162113055",
+                "lon": "-122.4100287258625"
+            }
+        },
+        {
+            "Name": "Slide",
+            "Type": "Club",
+			"DetailURL": "img/slide_detail_pin.png",
+            "Pos": {
+                "lat": "37.7875661848687",
+                "lon": "-122.40964483469725"
+            }
+        },
+		{
+            "Name": "Fuel LLC",
+            "Type": "Bar",
+			"DetailURL": "img/cantina_detail_pin.png",
+            "Pos": {
+                "lat": "37.780998",
+                "lon": "-122.412049"
+            }
+        },
+		{
+            "Name": "Mr Smith's",
+            "Type": "Club",
+			"DetailURL": "img/ruby_skye_detail_pin.png",
+            "Pos": {
+                "lat": "37.779974",
+                "lon": "-122.412086"
+            }
+        },
+			{
+            "Name": "Lalita Exotic Thai Cuisine & Bar",
+            "Type": "Bar",
+			"DetailURL": "img/cantina_detail_pin.png",
+            "Pos": {
+                "lat": "37.781038",
+                "lon": "-122.413538"
+            }
+        },
+		{
+            "Name": "The Showdown",
+            "Type": "Bar",
+			"DetailURL": "img/cantina_detail_pin.png",
+            "Pos": {
+                "lat": "37.781936",
+                "lon": "-122.410097"
+            }
+        },
+			{
+            "Name": "The Warfield",
+            "Type": "Bar",
+			"DetailURL": "img/cantina_detail_pin.png",
+            "Pos": {
+                "lat": "37.782767",
+                "lon": "-122.410435"
+            }
+        }
+    ]
+}
 
     for (var x = 0;x<Data.Clubs.length;x++)
     {
-        var marker =  createMarker(Data.Clubs[x].Pos.lat,Data.Clubs[x].Pos.lon,'bla','img/icon.png',Data.Clubs[x].ID)
+	 var image = 'img/ic_pin_club.png';
+	 
+	if (Data.Clubs[x].Type == 'Bar')
+	 {
+	  image = 'img/ic_pin_bar.png';
+	 }
+	 else if (Data.Clubs[x].Type ==  'Clubs')
+	 {
+	  image = 'img/ic_pin_club.png';
+	 }
+	 else if (Data.Clubs[x].Type ==  'Event')
+	 {
+	  image = 'img/ic_pin_events.png';
+	 }
+
+		
+		 marker = new google.maps.Marker({
+            position: new google.maps.LatLng(Data.Clubs[x].Pos.lat,Data.Clubs[x].Pos.lon),
+            map: map,
+            icon: image,
+            title:Data.Clubs[x].ID
+        });
+		 google.maps.event.addListener(marker, 'click', function() {
+        //alert("I am marker " + marker.title);
+        $('#Phone').find('.DetailLayer').show();
+        $('#Phone').find('.DetailLayer').animate({top:'85%'},200,function(){
+
+          GetDetailData (ID);
+
+        });
+    });
+		marker.iconLevel1 = image;
+		marker.iconLevel2 = Data.Clubs[x].DetailURL;
+		Markers.push(marker);
     }
 }
 
@@ -114,7 +210,7 @@ function createMarker(lat,lon, t,icon,ID) {
         });
     });
 
-    Markers.push(marker);
+  
 }
 
 function GetDetailData (ID)
@@ -134,6 +230,67 @@ function GetDetailData (ID)
 
 function Events ()
 {
+var zoomLevel = 1;
+
+google.maps.event.addListener(map, 'zoom_changed', function() {
+  var i, prevZoomLevel;
+
+  prevZoomLevel = zoomLevel;
+
+  if ( map.getZoom() > 20)
+  zoomLevel = 3
+  else if ( map.getZoom() > 17)
+  zoomLevel = 2;
+	else 
+	zoomLevel = 1;
+	
+  if (prevZoomLevel !== zoomLevel) {
+    for (i = 0; i < Markers.length; i++) {
+      if (zoomLevel === 2) {
+        Markers[i].setIcon(Markers[i].iconLevel2);
+      }
+      else {
+        Markers[i].setIcon(Markers[i].iconLevel1);
+      }
+	  
+	  if (zoomLevel === 3) {
+		   marker = new google.maps.Marker({
+            position: new google.maps.LatLng(37.7743295,-122.4195155),
+            map: map,
+            icon: 'img/ic_pin_friend.png',
+			clickable: true,
+            title:"ID"
+
+        });
+
+		marker.info = new google.maps.InfoWindow({
+			content: 'David Farr'
+			});
+
+			google.maps.event.addListener(marker, 'click', function() {
+			marker.info.open(map, marker);
+			});
+			
+			
+			marker2 = new google.maps.Marker({
+            position: new google.maps.LatLng(37.7743495,-122.4195355),
+            map: map,
+            icon: 'img/ic_pin_friend.png',
+			clickable: true,
+            title:"ID"
+
+        });
+		marker2.info = new google.maps.InfoWindow({
+			content: 'Max Mustermann'
+			});
+
+			google.maps.event.addListener(marker2, 'click', function() {
+			marker2.info.open(map, marker2);
+			});
+	  }
+    }
+  }
+});
 
     // SWITCH TOM MY LOC
     $('#Phone').find('.Location').click(function(){
