@@ -27,7 +27,8 @@ function initialize() {
     var mapOptions = {
         center: new google.maps.LatLng(37.7749295,-122.4194155),
         zoom: 13,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        disableDefaultUI: true
     };
      map = new google.maps.Map(document.getElementById("Map"),
         mapOptions);
@@ -149,6 +150,12 @@ function Events ()
         $('#Phone').find('.RateLayer').css('left','0px');
     })
 
+    Hammer('.RateLayer').on("swipeleft", function(e) {
+
+        $('#Phone').find('.RateLayer').css('left','-100%');
+        e.preventDefault();
+    })
+
 
     Hammer('body').on("swipeup", function(e) {
         //alert('you swiped left!');
@@ -164,6 +171,11 @@ function Events ()
         e.preventDefault()
 
     });
+
+    document.addEventListener('touchmove',function(e) {
+
+        e.preventDefault();
+    },false);
 
 
     /*
