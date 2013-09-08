@@ -1,0 +1,96 @@
+#Details {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+}
+
+#Details .header {
+	height: 60px;
+	padding: 10px 0 10px 10px;
+	font-size: 20px;
+	border-bottom: 1px solid #ccc;
+}
+
+#Details .header .header-title {
+	float:left;
+	padding: 0 0 0 80px;
+	height: 62px;
+	background: url(img/ruby_skye.png) left no-repeat;
+	background-size: 65px 60px;
+}
+
+#Details .header .uber {
+	float: right;
+	height:60px;
+	width: 60px;
+	padding: 0 20px;
+	border-left: 1px solid #ccc;
+}
+
+#Details .header .uber .image {
+	height:60px;
+	width: 60px;
+	background: url(img/uber.png) center no-repeat;
+	background-size: 60px 59px;
+}
+
+#Details .address {
+	padding: 20px;
+}
+
+#Details .charts {
+	padding: 20px;
+	margin-bottom: 20px;
+}
+
+#Details .charts canvas {
+	margin: 0 20px;
+}
+
+#Details .friend-title {
+	font-size: 18px;
+	padding: 0 0 0 80px;
+	background: url(img/friends.png) left no-repeat;
+	background-size: 85px 40px;
+}
+
+#Details .friends {
+	padding: 20px;
+}
+
+#Details .friends .friend {
+	margin: 10px;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+
+.small {
+	font-weight: 300;
+	font-size: 14px;
+}
+
+.center {
+	text-align: center;
+}
+
+.clear {
+	clear: both;
+}
+
+.pull-left {
+	float: left;
+}
+
+p {
+	margin: 0;
+}
+
+.google {
+	background: url(img/g-plus.png) right no-repeat;
+	background-size: 25px 25px;
+}
+
+.facebook {
+	background: url(img/facebook.gif) right no-repeat;
+	background-size: 25px 25px;
+}
